@@ -10,6 +10,7 @@ public class ContextScopedProvider<T> {
     @Inject protected Provider<T> provider;
 
     public T get(Context context) {
+        //see https://github.com/roboguice/roboguice/issues/112
         final ContextScope scope = RoboGuice.getInjector(context).getInstance(ContextScope.class);
         synchronized (ContextScope.class) {
             scope.enter(context);
