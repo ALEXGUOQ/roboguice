@@ -7,10 +7,10 @@ import android.content.Context;
 
 
 public class ContextScopedProvider<T> {
-    @Inject protected ContextScope scope;
     @Inject protected Provider<T> provider;
 
     public T get(Context context) {
+        final ContextScope scope = RoboGuice.getInjector(context).getInstance(ContextScope.class);
         synchronized (ContextScope.class) {
             scope.enter(context);
             try {
